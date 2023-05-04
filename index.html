@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+>
+    <title>Counter with Random Wallpaper Background and Button Animation</title>
+    <style>
+        body {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            transition: background-image 0.5s ease-out;
+        }
+        button {
+            font-size: 24px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease-out;
+        }
+        button:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transition: width 0.3s ease-out, height 0.3 ease-out, opacity 0.3s ease-out;
+        }
+        button:focus {
+            outline: none;
+        }
+        button:hover {
+            background-color: #3e8e41;
+        }
+        button:active:after {
+            width: 300px;
+            height: 300px;
+            opacity: 1;
+        }
+        #counter {
+            font-size: 48px;
+            text-align: center;
+            font-family: Calibri, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .box {
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            margin: 0 10px;
+        }
+    </style>
+    <script>
+        var count = 0;
+        function increment() {
+            count++;
+            document.getElementById('counter').innerHTML = count;
+            document.body.classList.add('animate-background');
+            setTimeout(() => {
+                document.body.classList.remove('animate-background');
+            }, 500);
+            document.cookie = "count=" + count;
+        }
+        function reset() {
+            count = 0;
+            document.getElementById('counter').innerHTML = count;
+            document.cookie = "count=" + count;
+        }
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) {
+                return parts.pop().split(";").shift();
+            }
+        }
+        function changeBackground() {
+            var accessKey = 'a4SSJOszubIStGWMG-ZqRpq1qL4OcZqNqqYAzbt8Y2k';
+            var topic = 'wallpapers';
+            var url = 'https://api.unsplash.com/topics/' + topic + '/photos?client_id=' + accessKey;
+            fetch(url)
+              .then(response => response.json())
+              .then(data => {
+                var randomIndex = Math.floor(Math.random() * data.length);
+                var imageUrl = data[randomIndex].urls.full;
+                document.body.style.backgroundImage = 'url(' + imageUrl + ')';
+              })
+              .catch(error => console.log(error));
+        }
+        window.onload = function() {
+            var savedCount = getCookie("count");
+            if (savedCount) {
+                count = parseInt(savedCount);
+                document.getElementById('counter').innerHTML = count;
+            }
+            changeBackground();
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <div id="counter">0</div>
+            <div class="button-container">
+                <button onclick="increment()">Click Me!</button>
+                <button onclick="reset()">Reset</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
