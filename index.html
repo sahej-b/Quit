@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
->
+<head>
     <title>Counter Random Wallpaper Background and Button Animation</title>
     <style>
         body {
@@ -77,6 +77,15 @@
             bottom: 20px;
             right: 20px;
         }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
     <script>
         var count = 0;
@@ -135,5 +144,8 @@
         </div>
     </div>
     <button class="change-background-button" onclick="changeBackground()">Change Background</button>
+    <footer>
+        <p>&copy; 2023 Your Company</p>
+    </footer>
 </body>
 </html>
