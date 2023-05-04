@@ -104,7 +104,7 @@
         function changeBackground() {
             var accessKey = 'a4SSJOszubIStGWMG-ZqRpq1qL4OcZqNqqYAzbt8Y2k';
             var topic = 'wallpapers';
-            var url = 'https://api.unsplash.com/' + topic + '/photos?client_id=' + accessKey;
+            var url = 'https://api.unsplash.com/topics/' + topic + '/photos?client_id=' + accessKey;
             fetch(url)
               .then(response => response.json())
               .then(data => {
