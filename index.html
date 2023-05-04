@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 >
-    <title>Counter with Random Wallpaper Background and Button Animation</title>
+    <title>Counter Random Wallpaper Background and Button Animation</title>
     <style>
         body {
             background-size: cover;
@@ -72,6 +72,11 @@
         .button-container button {
             margin: 0 10px;
         }
+        .change-background-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
     </style>
     <script>
         var count = 0;
@@ -99,7 +104,7 @@
         function changeBackground() {
             var accessKey = 'a4SSJOszubIStGWMG-ZqRpq1qL4OcZqNqqYAzbt8Y2k';
             var topic = 'wallpapers';
-            var url = 'https://api.unsplash.com/topics/' + topic + '/photos?client_id=' + accessKey;
+            var url = 'https://api.unsplash.com/' + topic + '/photos?client_id=' + accessKey;
             fetch(url)
               .then(response => response.json())
               .then(data => {
@@ -129,5 +134,6 @@
             </div>
         </div>
     </div>
+    <button class="change-background-button" onclick="changeBackground()">Change Background</button>
 </body>
 </html>
